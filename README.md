@@ -154,9 +154,7 @@ X_train,X_valid,y_train,y_valid = train_test_split(X_train,y_train,test_size=0.2
 show_compared_histogram(y_train,y_valid)
 ```
 
-
-![png](./writeup_img/output_39_0.png)   
-
+![png](./writeup_img/output_39_0.png)
 
 #### Normalize image data
 
