@@ -185,7 +185,6 @@ show_compared_histogram(y_train,y_valid)
 
 
 ![png](./writeup_img/output_39_0.png)   
-![png](./writeup_img/output_39_0.png)
 
 
 ----
