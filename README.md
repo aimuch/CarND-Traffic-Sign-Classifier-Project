@@ -1,4 +1,3 @@
-
 # Self-Driving Car Engineer Nanodegree
 
 ## Deep Learning
@@ -158,7 +157,9 @@ show_compared_histogram(y_train,y_valid)
 
 #### Normalize image data
 
-the image data is normalized to [-1,1]. For image data, `(pixel - 128.)/ 128.` is a quick way to approximately normalize the data . 
+For image data, `(pixel - 128.)/ 128.` is a quick way to approximately normalize the data . The image pixel is range [-1,1]. And it has mean 0. This process will made the model fastly convergence. The image as follows:
+
+![jpg](./writeup_img/normalized.jpg)
 
 ```python
 X_train_normalized = (X_train - 128.)/128
@@ -259,9 +260,9 @@ My final model results were:
 * training set accuracy of ?   
   Train Accuracy = 1.0000   
 * validation set accuracy of ?   
-  Validation Accuracy = 0.9992    
+  Validation Accuracy = 0.9990    
 * test set accuracy of ?    
-  Test Accuracy = 0.9846  
+  Test Accuracy = 0.9879     
 
 An iterative approach was chosen:    
 * What was the first architecture that was tried and why was it chosen?    
@@ -277,9 +278,9 @@ An iterative approach was chosen:
 
 ## 5、Analysis Error Images
 
-#### Through the following picture, we known the images which have a shadow or over exposure lead to accuracy lowly.    
+ Through the following picture, we known the images which have a shadow or over exposure lead to accuracy lowly.    
 ```
-    The number of incorrectly predict labels is 194
+    The number of incorrectly predict labels is 153
 ```    
 
 
@@ -295,7 +296,7 @@ Here are five German traffic signs that I found on the web:
 
 ![png](./writeup_img/output_68_0.png)
 
-The five images might be similar to the train iamges.    
+    The first and the fourth image might be difficult to classify because beacuse of the irrelevant information like the watermark in the images.
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
@@ -303,50 +304,60 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:----------------------|:----------------------------------------------| 
-| Speed limit (20km/h)  | Speed limit (20km/h)  			     		| 
-| Stop       			| Stop  										|
-| Speed limit (50km/h)	| Speed limit (50km/h)							|
+| Stop                  | Stop                    			     		| 
+| Speed limit (50km/h)  | Speed limit (50km/h)  						|
+| Road work         	| Road work         							|
 | Turn left ahead  		| Turn left ahead		    	 				|
-| Speed limit (20km/h)	| Speed limit (20km/h) 							|
+| Speed limit (120km/h)	| Speed limit (120km/h) 							|
     
 The model was able to correctly guess 5 of the 5 traffic signs, which gives an accuracy of 100%. This compares favorably to the accuracy on the test set of ...
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-
-![png](./writeup_img/output_70_1.png)
-
+![jpg](./writeup_img/predict_1.jpg)
+ ```
+  For the first image, the model rightly predicts Stop sign(probability of 1), and the image does contain a Stop sign. The top five soft max probabilities were:   
+    * P0: 1.000000 - Stop
+    * P1: 0.000000 - No entry
+    * P2: 0.000000 - Road work
+    * P3: 0.000000 - Speed limit (20km/h)
+    * P4: 0.000000 - No vehicles
 ```
-    Image  0:
-     * P0: 0.9999920129776001 - Speed limit (20km/h)
-     * P1: 3.950679001718527e-06 - Bumpy road
-     * P2: 1.2387681636027992e-06 - Go straight or left
-     * P3: 7.85742145126278e-07 - Slippery road
-     * P4: 3.9243425931090314e-07 - Dangerous curve to the right
-    Image  1:
-     * P0: 0.9999912977218628 - Stop
-     * P1: 8.44904025143478e-06 - Priority road
-     * P2: 1.296925660199122e-07 - Go straight or left
-     * P3: 1.1709016689565033e-07 - Road work
-     * P4: 5.583398987596411e-08 - Bicycles crossing
-    Image  2:
-     * P0: 1.0 - Speed limit (50km/h)
-     * P1: 3.9274411076053626e-16 - Double curve
-     * P2: 1.5519691692895464e-17 - Speed limit (30km/h)
-     * P3: 1.501514129774017e-17 - Slippery road
-     * P4: 1.2681259471227926e-17 - Roundabout mandatory
-    Image  3:
-     * P0: 1.0 - Turn left ahead
-     * P1: 2.614573655981291e-16 - Priority road
-     * P2: 8.40383209222762e-17 - Go straight or left
-     * P3: 8.06500898715855e-17 - Ahead only
-     * P4: 1.1742970304435551e-18 - Bumpy road
-    Image  4:
-     * P0: 0.6406804919242859 - Speed limit (20km/h)
-     * P1: 0.2095475047826767 - Speed limit (120km/h)
-     * P2: 0.1461586058139801 - Dangerous curve to the right
-     * P3: 0.003080248599871993 - Speed limit (80km/h)
-     * P4: 0.00015177369641605765 - No passing for vehicles over 3.5 metric tons
+![jpg](./writeup_img/predict_2.jpg)
+```
+For the second image, the model is sure that this is a Speed limit (50km/h) sign (probability of 1), and the image does contain a Speed limit (50km/h) sign. The top five soft max probabilities were    
+    * P0: 1.000000 - Speed limit (50km/h)
+    * P1: 0.000000 - Double curve
+    * P2: 0.000000 - Speed limit (60km/h)
+    * P3: 0.000000 - Bicycles crossing
+    * P4: 0.000000 - Ahead only
+```
+![jpg](./writeup_img/predict_3.jpg)
+```
+For the third image, the model is sure that this is a Road work sign (probability of 1), and the image does contain a Road work sign. The top five soft max probabilities were    
+    * P0: 1.000000 - Road work
+    * P1: 0.000000 - Stop
+    * P2: 0.000000 - Bumpy road
+    * P3: 0.000000 - Speed limit (70km/h)
+    * P4: 0.000000 - Dangerous curve to the right
+```
+![jpg](./writeup_img/predict_4.jpg)
+```
+For the fourth image, the model is sure that this is a Turn left ahead sign (probability of 1), and the image does contain a Turn left ahead sign. The top five soft max probabilities were    
+    * P0: 1.000000 - Turn left ahead
+    * P1: 0.000000 - Ahead only
+    * P2: 0.000000 - Vehicles over 3.5 metric tons prohibited
+    * P3: 0.000000 - Go straight or left
+    * P4: 0.000000 - Go straight or right
+```
+![jpg](./writeup_img/predict_5.jpg)
+```
+For the fifth image, the model is sure that this is a Speed limit (120km/h) sign (probability of 1), and the image does contain a Speed limit (120km/h) sign. The top five soft max probabilities were    
+    * P0: 0.999934 - Speed limit (120km/h)
+    * P1: 0.000066 - Speed limit (20km/h)
+    * P2: 0.000000 - Speed limit (70km/h)
+    * P3: 0.000000 - Keep left
+    * P4: 0.000000 - Vehicles over 3.5 metric tons prohibited
 ```    
 
 
